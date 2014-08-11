@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE database SYSTEM "C:\Users\jax\workspace\Engine\database_3_3.htm">
+
+<database name="bilecik" defaultIdMethod="idbroker" package="pl.jax.sawik.databse" defaultJavaType="object">
+
+	<table name="vuser" isPublic="true" description="User data">
+		<column name="id" required="true" type="INTEGER" primaryKey="true" />
+		<column name="login" required="true" type="VARCHAR" size="30" />
+		<column name="password" required="true" type="VARCHAR" size="128" />
+		<column name="salt" required="false" type="VARCHAR" size="256" />
+		<column name="active" required="true" type="BOOLEANINT" default="0" />
+		<column name="activation_code" required="true" type="VARCHAR" size="64" />
+		<column name="premium" required="true" type="BOOLEANINT" default="0" />
+		<column name="email" required="true" type="VARCHAR" size="100" />
+		<column name="points" required="true" type="DOUBLE" default="0.0" />
+	</table>
+	
+	<table name="alert_types" isPublic="true" description="Types of alert">
+		<column name="id" required="true" type="INTEGER" primaryKey="true" />
+		<column name="type_name" required="true" type="VARCHAR" size="30" />
+		<column name="type_description" required="false" type="VARCHAR" size="255" />
+		<column name="picture" required="true" type="BLOB" />
+	</table>
+	
+	<table name="alert" isPublic="true" description="Types of alert">
+		<column name="id" required="true" type="INTEGER" primaryKey="true" />
+		<column name="vuser_id" required="true" type="INTEGER" />
+		<column name="type" required="true" type="INTEGER" />
+		<column name="lat" required="true" type="DOUBLE" />
+		<column name="lng" required="true" type="DOUBLE" />
+		<column name="line" required="false" type="VARCHAR" size="10" />
+		<column name="description" required="false" type="VARCHAR" size="255" />
+		<foreign-key foreignTable="vuser">
+			<reference local="vuser_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="alert_types">
+			<reference local="type" foreign="id" />
+		</foreign-key>
+	</table>
+	
+	<table name="bug_tracer" isPublic="true" description="Bug report system">
+		<column name="id" required="true" type="INTEGER" primaryKey="true" />
+		<column name="vuser_id" required="true" type="INTEGER" />
+		<column name="title" required="true" type="VARCHAR" size="30" />
+		<column name="content" required="true" type="VARCHAR" size="255" />
+		<column name="report_time" required="true" type="TIMESTAMP" />
+		<column name="status" required="true" type="INTEGER" />
+		<foreign-key foreignTable="vuser">
+			<reference local="vuser_id" foreign="id" />
+		</foreign-key>
+	</table>
+	
+	<table name="sessions" isPublic="true" description="User sessions">
+		<column name="id" required="true" type="INTEGER" primaryKey="true" />
+		<column name="session_id" required="true" type="VARCHAR" size="128" />
+		<column name="vuser_id" required="true" type="INTEGER" />
+		<column name="expiry_time" required="true" type="TIMESTAMP" />
+		<foreign-key foreignTable="vuser">
+			<reference local="vuser_id" foreign="id" />
+		</foreign-key>
+	</table>
+	
+</database>

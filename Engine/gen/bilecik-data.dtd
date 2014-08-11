@@ -1,0 +1,60 @@
+<!ELEMENT dataset (
+    Vuser|
+    AlertTypes|
+    Alert|
+    BugTracer|
+    Sessions)*>
+<!ATTLIST dataset
+    name CDATA #REQUIRED
+>
+
+<!ELEMENT Vuser EMPTY>
+<!ATTLIST Vuser
+    Id CDATA #REQUIRED
+    Login CDATA #REQUIRED
+    Password CDATA #REQUIRED
+    Salt CDATA #IMPLIED
+    Active CDATA #REQUIRED
+    ActivationCode CDATA #REQUIRED
+    Premium CDATA #REQUIRED
+    Email CDATA #REQUIRED
+    Points CDATA #REQUIRED
+>
+
+<!ELEMENT AlertTypes EMPTY>
+<!ATTLIST AlertTypes
+    Id CDATA #REQUIRED
+    TypeName CDATA #REQUIRED
+    TypeDescription CDATA #IMPLIED
+    Picture CDATA #REQUIRED
+>
+
+<!ELEMENT Alert EMPTY>
+<!ATTLIST Alert
+    Id CDATA #REQUIRED
+    VuserId CDATA #REQUIRED
+    Type CDATA #REQUIRED
+    Lat CDATA #REQUIRED
+    Lng CDATA #REQUIRED
+    Line CDATA #IMPLIED
+    Description CDATA #IMPLIED
+>
+
+<!ELEMENT BugTracer EMPTY>
+<!ATTLIST BugTracer
+    Id CDATA #REQUIRED
+    VuserId CDATA #REQUIRED
+    Title CDATA #REQUIRED
+    Content CDATA #REQUIRED
+    ReportTime CDATA #REQUIRED
+    Status CDATA #REQUIRED
+>
+
+<!ELEMENT Sessions EMPTY>
+<!ATTLIST Sessions
+    Id CDATA #REQUIRED
+    SessionId CDATA #REQUIRED
+    VuserId CDATA #REQUIRED
+    ExpiryTime CDATA #REQUIRED
+>
+
